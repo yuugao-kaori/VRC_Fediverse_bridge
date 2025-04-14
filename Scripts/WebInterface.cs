@@ -54,10 +54,12 @@ public class WebInterface : UdonSharpBehaviour
     {
         url = newUrl;
     }
-      public override void OnStringLoadSuccess(IVRCStringDownload result)
+    public override void OnStringLoadSuccess(IVRCStringDownload result)
     {
         isLoading = false;
         string resultText = result.Result;
+        
+        Debug.Log("[WebInterface] データ取得成功");
         
         // nullチェックを追加
         if (textDisplaySystem != null)
@@ -67,7 +69,8 @@ public class WebInterface : UdonSharpBehaviour
         }
         else
         {
-            Debug.LogError("[WebInterface] TextDisplaySystem参照がnullです。取得したデータを表示できません: " + resultText);
+            Debug.LogError("[WebInterface] TextDisplaySystem参照がnullです。取得したデータを表示できません");
+            // 大きなデータの場合はログに出力するとエディタがフリーズする可能性があるため、ログには出力しない
         }
     }
     
